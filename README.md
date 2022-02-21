@@ -23,10 +23,10 @@ conda create --file requirements.txt
 We simulate the setup for labeled and unlabeled data with the training sets of CIFAR-10, CIFAR-100, MNIST and IMDb. `train.py` file is the main entry point for training the model and run the code with the following command:
 
 ```setup
-python train_PU.py --data-type="cifar_DogCat" --train-method="TEDn" --net-type="ResNet" --epochs=1000 --warm-start --warm-start-epochs=100 --alpha=0.5
+python train.py --lr=0.1 --clean-samples=40000 --noise-samples=10000 --check-steps=100 --wd=0.0005 --dataset=CIFAR10 --arch=Resnet --batch-size=200 --num-classes=10
 ```
 
-Change the parameters to your liking and run the experiment. For example, change dataset with varying --data-type and vary algorithm with varying --train-method. We implement the BBE estimator in `estimator.py` and CVIR algorithm in `algorithm.py`.
+Change the parameters to your liking and run the experiment. For example, change dataset with varying --dataset and architecture --arch. We implement IMDb dataset with LSTM model in `train_imdb_elmo.py`.   
 
 ## License
 This repository is licensed under the terms of the [Apache-2.0 License](LICENSE).
