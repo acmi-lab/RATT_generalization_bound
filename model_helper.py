@@ -3,9 +3,7 @@ import sys
 
 import torch 
 import torch.nn as nn
-from transformer import AdamW
-from keras.optimizers import adam
-
+from transformers import AdamW
 
 from models import *
 
@@ -49,15 +47,12 @@ def get_optimizer(net, dataset_name, lr = 0.1, momentum = 0.9, weight_decay = 0.
         optimizer = torch.optim.SGD(net.parameters(), lr=lr, momentum=momentum, weight_decay=weight_decay)
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.1)
 
-    elif dataset_name.lower().startswith("imdb_bert"):
+    elif dataset_name.lower().startswith("imdb"):
         optimizer = AdamW(net.parameters(), lr=lr)
         scheduler = None
 
-    elif dataset_name.lower().startswith("imdb_elmo"): 
-        optimizer = adam(lr = lr, decay = weight_decay)
-        scheduler = None
     else: 
-        raise NotImplementedError("Dataset name must start with cifar | mnist | imdb_bert | imdb_elmo")
+        raise NotImplementedError("Dataset name must start with cifar | mnist | imdb ... ")
 
     return optimizer, scheduler
 
@@ -83,8 +78,8 @@ def pred_accuracy(net, dataloader, device, num_classes):
             _, predicted = torch.max(outputs, 1)
             
             predicted  = predicted.cpu().numpy()
-            
-            true_total += labels.size(0) -  np.sum(mask)
+
+            true_total += len(labels) -  np.sum(mask)
             noisy_total += np.sum(mask)
 
             true_idx = np.where(mask == 0)[0]
@@ -95,7 +90,7 @@ def pred_accuracy(net, dataloader, device, num_classes):
 
     train_acc = true_correct*100.0 / true_total
     noisy_acc = noisy_correct*100.0 / noisy_total
-    pred_err = (100.0 - train_acc) + (num_classes - 1)*( 100.0 - num_classes/(num_classes - 1) * ( 100.0 - noisy_correct))
+    pred_err = (100.0 - train_acc) + (num_classes - 1)*( 100.0 - num_classes * ( 100.0 - noisy_acc)/(num_classes - 1))
     pred_acc = 100.0 - pred_err
    
     return train_acc, pred_acc
@@ -113,7 +108,7 @@ def true_accuracy(net, dataloader, device, num_classes):
 
             labels = batch[1].numpy()
 
-            true_total += labels.size(0)
+            true_total += len(labels)
 
             outputs = net(inputs)
             _, predicted = torch.max(outputs, 1)

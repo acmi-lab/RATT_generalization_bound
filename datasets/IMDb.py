@@ -56,15 +56,15 @@ class IMDbBERTData(torch.utils.data.Dataset):
         encodings = transform(data)
         
         self.data = encodings
-        self.labels = labels
+        self.targets = labels
 
         self.transform = None
         self.target_transform = None
 
     def __len__(self):
-        return len(self.labels)
+        return len(self.targets)
     
     def __getitem__(self, index):
         x = self.data[index]
-        y = self.labels[index]
+        y = self.targets[index]
         return x, y

@@ -2,7 +2,7 @@ import numpy as np
 from torchvision.datasets import CIFAR10, CIFAR100, MNIST
 import torchvision.transforms as transforms
 
-from datasets.IMDb import * 
+from datasets import * 
 
 def custom_dataset(cls):
     """
@@ -23,12 +23,14 @@ def custom_dataset(cls):
 
 def random_label_noise(data, targets, clean_size, noise_size, num_classes=10): 
 
+    targets = np.array(targets)
     tot_size = len(targets)
     subset_size = clean_size + noise_size
 
     assert subset_size <= tot_size, "Clean size + noise size must be less than total size"
 
-    subset_idx = np.random.choice(np.arange(tot_size), subset_size, replace=False)
+    subset_idx = np.random.choice(tot_size, subset_size, replace=False)
+
 
     data = data[subset_idx]
     targets = targets[subset_idx]
