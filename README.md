@@ -3,11 +3,11 @@ Code and results accompanying our paper titled RATT: Leveraging Unlabeled Data t
 
 > Garg, S., Balakrishnan, S., Kolter, Z., Lipton, Z. (2021). RATT: Leveraging Unlabeled Data to Guarantee Generalization. arxiv preprint arXiv:2105.00303.
 ```
-@article{garg2021RATT,
-    title={ {RATT}: Leveraging Unlabeled Data to Guarantee Generalization }
+@inproceedings{garg2021RATT,
+    title={ {RATT}: Leveraging Unlabeled Data to Guarantee Generalization},
     author={Garg, Saurabh and Balakrishnan, Sivaraman and Kolter, Zico and Lipton, Zachary},
     year={2021},
-    journal={arXiv preprint arXiv:2105.00303}
+    booktitle={International Conference on Machine Learning (ICML)}
 }
 ```
 ## Requirements
