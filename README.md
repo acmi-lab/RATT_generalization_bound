@@ -1,5 +1,5 @@
 # RATT Generalization Bound
-Code and results accompanying our paper titled RATT: Leveraging Unlabeled Data to guarantee generalization at ICML 2021 (Long Talk). If you find this repository useful or use this code in your research, please cite the following paper: 
+Code and results accompanying our paper titled [RATT: Leveraging Unlabeled Data to guarantee generalization](https://arxiv.org/abs/2105.00303) at ICML 2021 (Long Talk). If you find this repository useful or use this code in your research, please cite the following paper: 
 
 > Garg, S., Balakrishnan, S., Kolter, Z., Lipton, Z. (2021). RATT: Leveraging Unlabeled Data to Guarantee Generalization. arxiv preprint arXiv:2105.00303.
 ```
